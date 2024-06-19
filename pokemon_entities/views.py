@@ -44,7 +44,6 @@ def show_all_pokemons(request):
     for pokemon in pokemons:
         pokemons_on_page.append({
             'pokemon_id': pokemon.id,
-            #'img_url': 'http://localhost:8000/media/bulbazavr.png',
             'img_url': request.build_absolute_uri(pokemon.img.url),
             'title_ru': pokemon.title,
         })

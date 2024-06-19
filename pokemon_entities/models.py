@@ -9,3 +9,6 @@ class Pokemon(models.Model):
         return f'{self.title}'
 
 
+class PokemonEntity(models.Model):
+    lat = models.FloatField()
+    lon = models.FloatField()

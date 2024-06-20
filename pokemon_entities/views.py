@@ -69,6 +69,11 @@ def show_pokemon(request, pokemon_id):
                                                            "pokemon_id": pokemon.previous_evolution.id,
                                                            "img_url": request.build_absolute_uri(
                                                                pokemon.previous_evolution.img.url)}
+            if pokemon.next_evolution.first() is not None:
+                requested_pokemon['next_evolution'] = {"title_ru": pokemon.next_evolution.first().title_ru,
+                                                       "pokemon_id": pokemon.next_evolution.first().id,
+                                                       "img_url": request.build_absolute_uri(
+                                                           pokemon.next_evolution.first().img.url)}
             break
     else:
         return HttpResponseNotFound('<h1>Такой покемон не найден</h1>')

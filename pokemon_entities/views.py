@@ -1,5 +1,4 @@
 import folium
-import json
 
 from django.http import HttpResponseNotFound, HttpRequest
 from django.shortcuts import render
@@ -32,13 +31,12 @@ def show_all_pokemons(request):
     pokemon_entities = PokemonEntity.objects.filter(appeared_at__lt=localtime(), disappeared_at__gt=localtime())
 
     folium_map = folium.Map(location=MOSCOW_CENTER, zoom_start=12)
-    for pokemon in pokemons:
-        for pokemon_entity in pokemon_entities:
-            add_pokemon(
-                folium_map, pokemon_entity.lat,
-                pokemon_entity.lon,
-                request.build_absolute_uri(pokemon.img.url)
-            )
+    for pokemon_entity in pokemon_entities:
+        add_pokemon(
+            folium_map, pokemon_entity.lat,
+            pokemon_entity.lon,
+            request.build_absolute_uri(pokemon_entity.pokemon.img.url)
+        )
 
     pokemons_on_page = []
     for pokemon in pokemons:
@@ -79,7 +77,8 @@ def show_pokemon(request, pokemon_id):
         return HttpResponseNotFound('<h1>Такой покемон не найден</h1>')
 
     folium_map = folium.Map(location=MOSCOW_CENTER, zoom_start=12)
-    requested_pokemon_entities = PokemonEntity.objects.filter(pokemon_id=requested_pokemon['pokemon_id'])
+    requested_pokemon_entities = PokemonEntity.objects.filter(pokemon_id=requested_pokemon['pokemon_id'],
+                                                              appeared_at__lt=localtime(), disappeared_at__gt=localtime())
     for pokemon_entity in requested_pokemon_entities:
         add_pokemon(
             folium_map, pokemon_entity.lat,

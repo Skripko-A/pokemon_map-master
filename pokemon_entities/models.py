@@ -2,7 +2,7 @@ from django.db import models  # noqa F401
 
 
 class Pokemon(models.Model):
-    title_ru = models.CharField(max_length=200, default='')
+    title_ru = models.CharField(max_length=200, default='pokemon_unnamed')
     img = models.ImageField(null=True)
     description = models.TextField(default='')
     title_en = models.CharField(max_length=200, default='')

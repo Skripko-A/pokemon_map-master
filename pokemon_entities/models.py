@@ -2,9 +2,9 @@ from django.db import models  # noqa F401
 
 
 class Pokemon(models.Model):
-    title_ru = models.CharField(max_length=200, default='pokemon_unnamed', verbose_name='Название (рус)')
+    title_ru = models.CharField(max_length=200, default='введите название покемона', verbose_name='Название (рус)')
     img = models.ImageField(null=True, verbose_name='Картинка')
-    description = models.TextField(default='описание покемона', verbose_name='Описание', blank=True)
+    description = models.TextField(default='', verbose_name='Описание', blank=True)
     title_en = models.CharField(max_length=200, verbose_name='Название (англ)', blank=True)
     title_jp = models.CharField(max_length=200, verbose_name='Название (япон)', blank=True)
     previous_evolution = models.ForeignKey('self', on_delete=models.CASCADE, null=True, blank=True,
@@ -17,12 +17,12 @@ class Pokemon(models.Model):
 class PokemonEntity(models.Model):
     lat = models.FloatField(verbose_name='Широта')
     lon = models.FloatField(verbose_name='Долгота')
-    pokemon = models.ForeignKey(Pokemon, default='ссылка на модель покемона', on_delete=models.CASCADE,
+    pokemon = models.ForeignKey(Pokemon, default='покемон не указан', on_delete=models.CASCADE,
                                 verbose_name='Укажите покемона')
     appeared_at = models.DateTimeField(blank=True, null=True, verbose_name='Время появления на карте')
     disappeared_at = models.DateTimeField(blank=True, null=True, verbose_name='Время появления на карте')
-    level = models.IntegerField(blank=True, verbose_name='Выносливость', default=1)
-    health_points = models.IntegerField(blank=True, verbose_name='Выносливость', default=1)
-    attack_power = models.IntegerField(blank=True, verbose_name='Сила атаки', default=1)
-    defence = models.IntegerField(blank=True, verbose_name='Защита', default=1)
-    endurance = models.IntegerField(blank=True, verbose_name='Выносливость', default=1)
+    level = models.IntegerField(blank=True, verbose_name='Выносливость', default=0)
+    health_points = models.IntegerField(blank=True, verbose_name='Выносливость', default=0)
+    attack_power = models.IntegerField(blank=True, verbose_name='Сила атаки', default=0)
+    defence = models.IntegerField(blank=True, verbose_name='Защита', default=0)
+    endurance = models.IntegerField(blank=True, verbose_name='Выносливость', default=0)

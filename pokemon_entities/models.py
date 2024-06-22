@@ -21,11 +21,11 @@ class PokemonEntity(models.Model):
                                 verbose_name='Укажите покемона', related_name='pokemon_entities')
     appeared_at = models.DateTimeField(blank=True, null=True, verbose_name='Время появления на карте')
     disappeared_at = models.DateTimeField(blank=True, null=True, verbose_name='Время появления на карте')
-    level = models.IntegerField(blank=True, verbose_name='Уровень', default=0)
-    health_points = models.IntegerField(blank=True, verbose_name='Очки здоровья', default=0)
-    attack_power = models.IntegerField(blank=True, verbose_name='Сила атаки', default=0)
-    defence = models.IntegerField(blank=True, verbose_name='Защита', default=0)
-    endurance = models.IntegerField(blank=True, verbose_name='Выносливость', default=0)
+    level = models.IntegerField(blank=True, verbose_name='Уровень', null=True)
+    health_points = models.IntegerField(blank=True, verbose_name='Очки здоровья', null=True)
+    attack_power = models.IntegerField(blank=True, verbose_name='Сила атаки', null=True)
+    defence = models.IntegerField(blank=True, verbose_name='Защита', null=True)
+    endurance = models.IntegerField(blank=True, verbose_name='Выносливость', null=True)
 
     def __str__(self):
         return f'{self.pokemon} уровень {self.level}'
